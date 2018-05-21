@@ -9,6 +9,7 @@ public class Singer extends Thread {
     private String singerName;
     private Voice voice;
     private Performance performance;
+    private Performance[] performanceArray;
     
     private boolean stopIt;
     private Synchronizer synch;
@@ -20,6 +21,14 @@ public class Singer extends Thread {
         this.performance = performance;
         this.stopIt = stopIt;
         this.synch = synch;
+    }
+    public Singer(String singerName, Voice voice, Performance[] performance, boolean stopIt, Synchronizer synch) {
+    	super();
+    	this.singerName = singerName;
+    	this.voice = voice;
+    	this.performanceArray = performance;
+    	this.stopIt = stopIt;
+    	this.synch = synch;
     }
 
     public Singer(String singerName, Voice voice, Performance performance, boolean stopIt) {
@@ -42,9 +51,13 @@ public class Singer extends Thread {
     private synchronized void sing() {
         while (!stopIt) {
             if (this.voice == Voice.FIRST) {
-                this.synch.singFirstVoice(performance.getLyrics(), performance.getDelay());
-            } else {
-                this.synch.singSecondVoice(performance.getLyrics(), performance.getDelay());
+                this.synch.singFirstVoice(performanceArray[Synchronizer.pattiLyrics].getLyrics(), performanceArray[Synchronizer.pattiLyrics].getDelay());
+            } else if (this.voice == Voice.SECOND){
+                this.synch.singSecondVoice(performanceArray[Synchronizer.bruceLyrics].getLyrics(), performanceArray[Synchronizer.bruceLyrics].getDelay());
+            }else if(this.voice == Voice.BACKGROUND) {
+            	this.synch.singChoir(performanceArray[Synchronizer.choirLyrics].getLyrics(), performanceArray[Synchronizer.choirLyrics].getDelay());
+            }else {
+            	this.synch.playGuitarSolo(performanceArray[Synchronizer.instrumental].getLyrics(),performanceArray[Synchronizer.instrumental].getDelay());
             }
         }
     }
