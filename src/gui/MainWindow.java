@@ -2,13 +2,15 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.DefaultCaret;
+
+import music.Synchronizer;
+
 import javax.swing.JTextArea;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -80,6 +82,11 @@ public class MainWindow extends JFrame {
 			btnStart.setPreferredSize(new Dimension(100, 23));
 			btnStart.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
+					Synchronizer.pattiLyrics = 0;
+					Synchronizer.bruceLyrics = 0;
+					Synchronizer.choirLyrics = 0;
+					Synchronizer.instrumental = 0;
+					Synchronizer.flag = 0;
 					GUIController.getT().initializeSingingInThreads(textArea);
 					GUIController.getT().getPattiSmith().start();
 					GUIController.getT().getBruceSpringsteen().start();
@@ -99,13 +106,17 @@ public class MainWindow extends JFrame {
 			btnStop.setPreferredSize(new Dimension(100, 23));
 			btnStop.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					
+
 					GUIController.getT().getPattiSmith().setStopIt(true);
 					GUIController.getT().getBruceSpringsteen().setStopIt(true);
 					GUIController.getT().getChoir().setStopIt(true);
 					GUIController.getT().getGuitarSolo().setStopIt(true);
 					btnStart.setEnabled(true);
 					btnStop.setEnabled(false);
-				}
+					
+					
+									}
 			});
 		}
 		return btnStop;

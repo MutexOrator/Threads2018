@@ -2,17 +2,24 @@ package gui;
 
 import java.awt.EventQueue;
 
+import music.Synchronizer;
 import test.Test;
 
 public class GUIController {
 	private static Test t;
-
+	private static Synchronizer s;
+	public static Synchronizer getS() {
+		return s;
+	}
 	public static Test getT() {
 		return t;
 	}
 
-	public void setT(Test t) {
+	public static void setT(Test t) {
 		GUIController.t = t;
+	}
+	public void setS(Synchronizer s) {
+		GUIController.s = s;
 	}
 	
 	/**

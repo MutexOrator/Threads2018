@@ -7,7 +7,7 @@ package music;
 import javax.swing.JTextArea;
 
 public class Synchronizer {
-	int flag = 0;
+	public static int flag = 0;
     public static int pattiLyrics=0;
     public static int bruceLyrics=0;
     public static int choirLyrics=0;
@@ -31,6 +31,7 @@ public class Synchronizer {
         }
         sing(lyrics, delay);
         pattiLyrics =(pattiLyrics + 1)%27;
+        
     }
     
     public synchronized void singSecondVoice(String lyrics, int delay) {
