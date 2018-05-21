@@ -4,6 +4,7 @@
  */
 package music;
 
+import javax.swing.JTextArea;
 
 public class Synchronizer {
 	int flag = 0;
@@ -11,11 +12,12 @@ public class Synchronizer {
     public static int bruceLyrics=0;
     public static int choirLyrics=0;
     public static int instrumental=0;
-
+    private JTextArea textArea;
 	private FirstFlag firstFlag;
-    public Synchronizer(FirstFlag firstFlag) {
+    public Synchronizer(FirstFlag firstFlag, JTextArea textArea) {
         super();
         this.firstFlag = firstFlag;
+        this.textArea = textArea;
     }
     
     public synchronized void singFirstVoice(String lyrics, int delay) {
@@ -69,7 +71,7 @@ public class Synchronizer {
     }
     
     private void sing(String lyrics, int delay) {
-        System.out.println(lyrics);
+        textArea.append(lyrics + "\n");
         try {
             wait(delay);
         } catch (InterruptedException e) {

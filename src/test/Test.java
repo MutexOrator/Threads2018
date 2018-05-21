@@ -7,6 +7,8 @@ package test;
 
 import java.util.Scanner;
 
+import javax.swing.JTextArea;
+
 import music.FirstFlag;
 import music.Performance;
 import music.Singer;
@@ -22,9 +24,41 @@ public class Test {
     private Singer choir;
     private Singer guitarSolo;
     
-    private void initializeSingingInThreads() {
+    public Singer getPattiSmith() {
+		return pattiSmith;
+	}
+
+	public void setPattiSmith(Singer pattiSmith) {
+		this.pattiSmith = pattiSmith;
+	}
+
+	public Singer getBruceSpringsteen() {
+		return bruceSpringsteen;
+	}
+
+	public void setBruceSpringsteen(Singer bruceSpringsteen) {
+		this.bruceSpringsteen = bruceSpringsteen;
+	}
+
+	public Singer getChoir() {
+		return choir;
+	}
+
+	public void setChoir(Singer choir) {
+		this.choir = choir;
+	}
+
+	public Singer getGuitarSolo() {
+		return guitarSolo;
+	}
+
+	public void setGuitarSolo(Singer guitarSolo) {
+		this.guitarSolo = guitarSolo;
+	}
+
+	public void initializeSingingInThreads(JTextArea textArea) {
         boolean stopIt = false;
-        Synchronizer synch = new Synchronizer(FirstFlag.guitarSolo);
+        Synchronizer synch = new Synchronizer(FirstFlag.guitarSolo, textArea);
         
         Performance[] firstVoicePerformance = {new Performance("Patti:     "+"Take me now, baby, here as I am", 3500),
         		new Performance("Patti:     "+"Pull me close, try and understand", 4000),
@@ -79,22 +113,22 @@ public class Test {
         guitarSolo = new Singer("Guitar Solo", Voice.GUITAR, guitarSoloPerformance, stopIt, synch);
     }
     
-    public void testSingInThreads() {
-        
-        initializeSingingInThreads();
-        
-        pattiSmith.start();
-        bruceSpringsteen.start();
-        choir.start();
-        guitarSolo.start();
-        
-        IN.nextLine();
-        pattiSmith.setStopIt(true);
-        bruceSpringsteen.setStopIt(true);
-        choir.setStopIt(true);
-        guitarSolo.setStopIt(true);
-        
-    }
+//    public void testSingInThreads() {
+//        
+//        initializeSingingInThreads();
+//        
+//        pattiSmith.start();
+//        bruceSpringsteen.start();
+//        choir.start();
+//        guitarSolo.start();
+//        
+//        IN.nextLine();
+//        pattiSmith.setStopIt(true);
+//        bruceSpringsteen.setStopIt(true);
+//        choir.setStopIt(true);
+//        guitarSolo.setStopIt(true);
+//        
+//    }
     
     public void simpleDelay() {
         long l1 = System.currentTimeMillis();
